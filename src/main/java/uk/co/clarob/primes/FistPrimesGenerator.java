@@ -4,10 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * An attempt to implement the simplest way of finding prime numbers. Iterate through all possible integers from 2 to
- * the maximum and test each in turn to see whether it has any factors. This has been slightly optimised as once you
- * have got halfway through the possible factors there is no need to test any further as we would have already found
- * the other factor in the pair.
+ * First attempt to implement finding prime numbers without research, by putting all possibles into a list and then
+ * removing those that are multiples of already established primes. Turns out this is a form of the Sieve of
+ * Eratosthenes and is considerably slower than trial division using my code (SimplestPrimesGenerator).
  */
 public class FistPrimesGenerator implements PrimesGenerator
 {
