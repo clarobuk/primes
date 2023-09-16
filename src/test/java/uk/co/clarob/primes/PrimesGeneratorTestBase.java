@@ -56,7 +56,7 @@ abstract class PrimesGeneratorTestBase
         assertThat(actualValue, is(equalTo(expectedValue)));
     }
 
-    @DisplayName("should generate first 1000 primes")
+    @DisplayName("should generate first 1,000 primes")
     @Test
     void shouldGenerateFirst1000Primes()
     {
@@ -66,7 +66,7 @@ abstract class PrimesGeneratorTestBase
         stopWatch.start();
         final List<Integer> actualValue = primesGenerator.generate(7920);
         stopWatch.stop();
-        log.info("Finding first 1000 primes to {} millis", stopWatch.getLastTaskTimeMillis());
+        log.info("Finding first 1,000 primes took {} millis", stopWatch.getLastTaskTimeMillis());
         // assert
         assertThat(actualValue.get(9), is(equalTo(29))); // 10th
         assertThat(actualValue.get(99), is(equalTo(541))); // 100th
@@ -83,7 +83,7 @@ abstract class PrimesGeneratorTestBase
         stopWatch.start();
         final List<Integer> actualValue = primesGenerator.generate(104730);
         stopWatch.stop();
-        log.info("Finding first 1000 primes to {} millis", stopWatch.getLastTaskTimeMillis());
+        log.info("Finding first 10,000 primes took {} millis", stopWatch.getLastTaskTimeMillis());
         // assert
         assertThat(actualValue.get(9), is(equalTo(29))); // 10th
         assertThat(actualValue.get(99), is(equalTo(541))); // 100th
