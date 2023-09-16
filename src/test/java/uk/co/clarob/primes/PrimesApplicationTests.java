@@ -1,13 +1,13 @@
-package uk.co.clarob.prime;
+package uk.co.clarob.primes;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class PrimeApplicationTests {
-
-	@Test
-	void contextLoads() {
-	}
-
+class PrimesApplicationTests
+{
+    @Test
+    void contextLoads()
+    {
+    }
 }
