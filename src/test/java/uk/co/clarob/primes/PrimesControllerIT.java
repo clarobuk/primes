@@ -14,7 +14,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-class PrimesControllerTest
+class PrimesControllerIT
 {
     @Autowired
     private MockMvc mockMvc;
@@ -36,5 +36,4 @@ class PrimesControllerTest
         // assert
         assertThat(actualValue, is(equalTo(expectedValue)));
     }
-
 }

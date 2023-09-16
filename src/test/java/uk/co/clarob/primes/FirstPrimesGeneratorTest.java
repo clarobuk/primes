@@ -7,4 +7,10 @@ class FirstPrimesGeneratorTest extends PrimesGeneratorTestBase
     {
         return new FistPrimesGenerator();
     }
+
+    @Override
+    String getImplementationClassName()
+    {
+        return this.getClass().getSimpleName();
+    }
 }

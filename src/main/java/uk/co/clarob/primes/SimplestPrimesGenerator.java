@@ -35,4 +35,10 @@ public class SimplestPrimesGenerator implements PrimesGenerator
         }
         return primes;
     }
+
+    @Override
+    public int practicalMaximum()
+    {
+        return 10000;
+    }
 }

@@ -1,11 +1,11 @@
 package uk.co.clarob.primes;
 
-class SimplestPrimesGeneratorTest extends PrimesGeneratorTestBase
+class ArraySievePrimesGeneratorTest extends PrimesGeneratorTestBase
 {
     @Override
     PrimesGenerator createPrimesGenerator()
     {
-        return new SimplestPrimesGenerator();
+        return new ArraySievePrimesGenerator();
     }
 
     @Override
@@ -13,5 +13,4 @@ class SimplestPrimesGeneratorTest extends PrimesGeneratorTestBase
     {
         return this.getClass().getSimpleName();
     }
-
 }

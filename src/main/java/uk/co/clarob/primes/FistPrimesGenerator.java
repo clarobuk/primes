@@ -40,4 +40,10 @@ public class FistPrimesGenerator implements PrimesGenerator
         }
         return possibles;
     }
+
+    @Override
+    public int practicalMaximum()
+    {
+        return 10000;
+    }
 }
