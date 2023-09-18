@@ -8,7 +8,7 @@ import java.util.List;
  * An attempt to make the Sieve of Eratosthenes faster by using an array as working storage rather than a list. This
  * proved to be much faster and faster than SimplestPrimesGenerator.
  */
-public class ArraySievePrimesGenerator implements PrimesGenerator
+public class SieveOfEratosthenesPrimesGenerator implements PrimesGenerator
 {
     @Override
     public List<Integer> generate(final int maximumPossibleNumber)

@@ -7,7 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -23,7 +23,7 @@ class PrimesControllerIT
     void shouldGetPrimesUpTo10() throws Exception
     {
         // arrange
-        final String expectedValue = "{\"initial\":10,\"primes\":[2,3,5,7]}";
+        final String expectedValue = "\"initial\":10,\"primes\":[2,3,5,7]";
         // act
         final String actualValue = mockMvc
                 .perform(get("/primes/10")
@@ -34,6 +34,6 @@ class PrimesControllerIT
                 .getResponse()
                 .getContentAsString();
         // assert
-        assertThat(actualValue, is(equalTo(expectedValue)));
+        assertThat(actualValue, is(containsString(expectedValue)));
     }
 }

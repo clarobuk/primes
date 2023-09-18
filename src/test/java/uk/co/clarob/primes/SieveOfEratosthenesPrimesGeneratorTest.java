@@ -1,11 +1,11 @@
 package uk.co.clarob.primes;
 
-class ArraySievePrimesGeneratorTest extends PrimesGeneratorTestBase
+class SieveOfEratosthenesPrimesGeneratorTest extends PrimesGeneratorTestBase
 {
     @Override
     PrimesGenerator createPrimesGenerator()
     {
-        return new ArraySievePrimesGenerator();
+        return new SieveOfEratosthenesPrimesGenerator();
     }
 
     @Override

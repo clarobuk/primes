@@ -3,9 +3,13 @@ package uk.co.clarob.primes;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.EntityModel;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
 public class PrimesController
@@ -22,8 +26,21 @@ public class PrimesController
     }
 
     @GetMapping("/primes/{max}")
-    public PrimeNumbers getPrimesUpTo(@PathVariable("max") final int maximumPrimeNumber)
+    public EntityModel<PrimeNumbers> getPrimesUpTo(@PathVariable("max") final int maximumPrimeNumber)
     {
-        return primesService.getPrimesUpTo(maximumPrimeNumber);
+        final PrimeNumbers primes = primesService.getPrimesUpTo(maximumPrimeNumber);
+
+        return EntityModel.of(
+                primes,
+                linkTo(methodOn(PrimesController.class).getPrimesUpTo(maximumPrimeNumber)).withSelfRel(),
+                linkTo(methodOn(PrimesController.class).getPrimesUsingTrialDivision(maximumPrimeNumber)).withSelfRel());
+    }
+
+    @GetMapping("/primes/byTrialDivision/{max}")
+    public EntityModel<PrimeNumbers> getPrimesUsingTrialDivision(@PathVariable("max") final int maximumPrimeNumber)
+    {
+        final PrimeNumbers primes = primesService.getPrimesUsingTrialDivision(maximumPrimeNumber);
+
+        return EntityModel.of(primes);
     }
 }
