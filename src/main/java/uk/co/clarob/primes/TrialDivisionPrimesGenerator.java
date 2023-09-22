@@ -14,10 +14,10 @@ import static java.lang.Math.sqrt;
 public class TrialDivisionPrimesGenerator implements PrimesGenerator
 {
     @Override
-    public List<Integer> generate(final int maximumPossibleNumber)
+    public List<Integer> generate(final int maximumPossiblePrimeNumber)
     {
         final List<Integer> primes = new ArrayList<>();
-        for (int possible = 2; possible <= maximumPossibleNumber; possible++)
+        for (int possible = 2; possible <= maximumPossiblePrimeNumber; possible++)
         {
             boolean isPrime = true;
             for (int toTest = 2; toTest <= sqrt(possible); toTest++)
@@ -39,6 +39,6 @@ public class TrialDivisionPrimesGenerator implements PrimesGenerator
     @Override
     public int practicalMaximum()
     {
-        return 10000;
+        return 20000000;
     }
 }

@@ -11,16 +11,16 @@ import java.util.List;
 public class SieveOfEratosthenesPrimesGenerator implements PrimesGenerator
 {
     @Override
-    public List<Integer> generate(final int maximumPossibleNumber)
+    public List<Integer> generate(final int maximumPossiblePrimeNumber)
     {
-        final boolean[] possibles = new boolean[maximumPossibleNumber + 1];
+        final boolean[] possibles = new boolean[maximumPossiblePrimeNumber + 1];
         Arrays.fill(possibles, true);
         possibles[0] = false;
         possibles[1] = false;
         int currentPrime = 2;
-        while (currentPrime <= Math.sqrt(maximumPossibleNumber))
+        while (currentPrime <= Math.sqrt(maximumPossiblePrimeNumber))
         {
-            for (int toRemove = currentPrime * currentPrime; toRemove <= maximumPossibleNumber; toRemove += currentPrime)
+            for (int toRemove = currentPrime * currentPrime; toRemove <= maximumPossiblePrimeNumber; toRemove += currentPrime)
             {
                 possibles[toRemove] = false;
             }
@@ -31,7 +31,7 @@ public class SieveOfEratosthenesPrimesGenerator implements PrimesGenerator
             while (!possibles[currentPrime]);
         }
         final List<Integer> primes = new ArrayList<>();
-        for (int index = 2; index <= maximumPossibleNumber; index++)
+        for (int index = 2; index <= maximumPossiblePrimeNumber; index++)
         {
             if (possibles[index])
             {
@@ -44,6 +44,6 @@ public class SieveOfEratosthenesPrimesGenerator implements PrimesGenerator
     @Override
     public int practicalMaximum()
     {
-        return 20000000;
+        return 1000000000;
     }
 }

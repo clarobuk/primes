@@ -12,10 +12,10 @@ public class FistPrimesGenerator implements PrimesGenerator
 {
     @SuppressWarnings("java:s127")
     @Override
-    public List<Integer> generate(final int maximumPossibleNumber)
+    public List<Integer> generate(final int maximumPossiblePrimeNumber)
     {
-        final List<Integer> possibles = new ArrayList<>(maximumPossibleNumber);
-        for (int number = 2; number <= maximumPossibleNumber; number++)
+        final List<Integer> possibles = new ArrayList<>(maximumPossiblePrimeNumber);
+        for (int number = 2; number <= maximumPossiblePrimeNumber; number++)
         {
             possibles.add(number);
         }
@@ -44,6 +44,6 @@ public class FistPrimesGenerator implements PrimesGenerator
     @Override
     public int practicalMaximum()
     {
-        return 10000;
+        return 400000;
     }
 }
