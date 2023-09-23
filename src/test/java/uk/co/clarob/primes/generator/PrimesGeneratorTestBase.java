@@ -20,7 +20,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Abstract class with all the unit tests for prime number generators, so that all the implementations can be checked
- * using the same tests.
+ * using the same tests. The sample prime numbers used in the series of tests that check large maximum vales was
+ * obtained from <a href="https://www.bigprimes.net">Bigprimes</a>
  */
 abstract class PrimesGeneratorTestBase
 {
@@ -41,7 +42,6 @@ abstract class PrimesGeneratorTestBase
         primesGenerator = createPrimesGenerator();
         implementationClassName = getImplementationClassName();
         stopWatch = new StopWatch();
-
     }
 
     @DisplayName("should generate all primes up to 10")
@@ -134,17 +134,44 @@ abstract class PrimesGeneratorTestBase
         assertThat(actualValue.get(999999), is(equalTo(15485863))); // 1,000,000th
     }
 
+    @DisplayName("should raise an exception when maximum is 1")
     @Test
     void shouldRaiseExceptionWhenMaximumIsTooSmall()
     {
         // arrange
-        final String expectedValue = "Maximum possible prime number: 1 provided is less than 2 which is not valid for generating prime numbers.";
+        final String expectedValue = "Maximum possible prime number (1) provided is less than 2 which is not valid for generating prime numbers.";
         // act
         // assert
         final OutOfRangeException outOfRangeException = assertThrows(
                 OutOfRangeException.class,
                 () -> primesGenerator.generate(1));
         assertThat(outOfRangeException.getMessage(), is(equalTo(expectedValue)));
+    }
+
+    @DisplayName("should raise an exception when maximum is negative")
+    @Test
+    void shouldRaiseExceptionWhenMaximumIsNegative()
+    {
+        // arrange
+        final String expectedValue = "Maximum possible prime number (-10) provided is less than 2 which is not valid for generating prime numbers.";
+        // act
+        // assert
+        final OutOfRangeException outOfRangeException = assertThrows(
+                OutOfRangeException.class,
+                () -> primesGenerator.generate(-10));
+        assertThat(outOfRangeException.getMessage(), is(equalTo(expectedValue)));
+    }
+
+    @DisplayName("should raise an exception when maximum is greater than the practical maximum")
+    @Test
+    void shouldRaiseExceptionWhenMaximumIsGreaterThanPracticalMaximum()
+    {
+        // arrange
+        // act
+        // assert
+        assertThrows(
+                OutOfRangeException.class,
+                () -> primesGenerator.generate(primesGenerator.practicalMaximum() + 1));
     }
 
 

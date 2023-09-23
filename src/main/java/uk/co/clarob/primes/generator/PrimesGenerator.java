@@ -14,7 +14,7 @@ public interface PrimesGenerator
     /**
      * Generate the list of prime numbers up to and possibly including the maximum specified.
      *
-     * @param maximumPossiblePrimeNumber The maximum number that shoud be considered when generating prime numbers.
+     * @param maximumPossiblePrimeNumber The maximum number that should be considered when generating prime numbers.
      * @return A list of prime numbers up to and possibly including the maximum specified.
      */
     List<Integer> generate(final int maximumPossiblePrimeNumber);
@@ -29,12 +29,16 @@ public interface PrimesGenerator
      */
     int practicalMaximum();
 
+    /**
+     * A method that can be used in each implementation to handle invalid inputs in a consistent way.
+     * @param maximumPossiblePrimeNumber The maximum prime number requested.
+     */
     default void checkOutOfBounds(final int maximumPossiblePrimeNumber)
     {
         if (maximumPossiblePrimeNumber < 2)
         {
             throw new OutOfRangeException(
-                    "Maximum possible prime number: " + maximumPossiblePrimeNumber + " provided is less than 2 which" +
+                    "Maximum possible prime number (" + maximumPossiblePrimeNumber + ") provided is less than 2 which" +
                             " is not valid for generating prime numbers.");
         }
         if (maximumPossiblePrimeNumber > this.practicalMaximum())

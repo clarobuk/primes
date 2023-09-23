@@ -20,16 +20,21 @@ public class FistApproachPrimesGenerator implements PrimesGenerator
     public List<Integer> generate(final int maximumPossiblePrimeNumber)
     {
         checkOutOfBounds(maximumPossiblePrimeNumber);
+        // Create a list with all the possible prime numbers in it up to the maximum.
         final List<Integer> possibles = new ArrayList<>(maximumPossiblePrimeNumber);
         for (int number = 2; number <= maximumPossiblePrimeNumber; number++)
         {
             possibles.add(number);
         }
+
         int primeIndex = 0;
+        // Keep indexing through the list until we reach the end, note the list gets shorter as we remove numbers we
+        // find are not primes.
         while (primeIndex < possibles.size())
         {
             final int currentPrime = possibles.get(primeIndex);
             int index = primeIndex + 1;
+            // Iterate through the list removing numbers that are multiples of the current prime
             while (index < possibles.size())
             {
                 final Integer toTry = possibles.get(index);

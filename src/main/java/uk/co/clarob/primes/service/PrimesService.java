@@ -63,7 +63,7 @@ public class PrimesService
         if (maximumPossiblePrimeNumber < 2)
         {
             throw new OutOfRangeException(
-                    "Maximum possible prime number: " + maximumPossiblePrimeNumber + " provided is less than 2 which" +
+                    "Maximum possible prime number (" + maximumPossiblePrimeNumber + ") provided is less than 2 which" +
                             " is not valid for generating prime numbers.");
         }
         if (maximumPossiblePrimeNumber > primesGenerator.practicalMaximum())

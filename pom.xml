@@ -16,6 +16,7 @@
 		<java.version>17</java.version>
 		<commons-lang3.version>3.12.0</commons-lang3.version>
 		<azure-spring-apps-maven-plugin.version>1.19.0</azure-spring-apps-maven-plugin.version>
+		<junit-platform-suite.version>1.8.2</junit-platform-suite.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -46,6 +47,12 @@
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
 			<version>${commons-lang3.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.platform</groupId>
+			<artifactId>junit-platform-suite</artifactId>
+			<version>${junit-platform-suite.version}</version>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 
