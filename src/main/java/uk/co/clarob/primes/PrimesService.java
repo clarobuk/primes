@@ -12,7 +12,7 @@ public class PrimesService
     final PrimesGenerator trialDivisionPrimesGenerator = new TrialDivisionPrimesGenerator();
     final PrimesGenerator sieveOfEratosthenesPrimesGenerator = new SieveOfEratosthenesPrimesGenerator();
 
-    public PrimeNumbers getPrimesUpTo(final int maximumPossiblePrimeNumber)
+    public PrimeNumbers getPrimes(final int maximumPossiblePrimeNumber)
     {
         return new PrimeNumbers(maximumPossiblePrimeNumber, primesGenerator.generate(maximumPossiblePrimeNumber));
     }

@@ -25,22 +25,70 @@ public class PrimesController
         log.info("{} created", PrimesController.class.getSimpleName());
     }
 
-    @GetMapping("/primes/{max}")
-    public EntityModel<PrimeNumbers> getPrimesUpTo(@PathVariable("max") final int maximumPrimeNumber)
+    @GetMapping("/")
+    public EntityModel<Usage> information()
     {
-        final PrimeNumbers primes = primesService.getPrimesUpTo(maximumPrimeNumber);
+        return EntityModel.of(
+                new Usage("Service to generate and return prime numbers up to the specified maximum value"),
+                linkTo(methodOn(PrimesController.class).getPrimes(10))
+                        .withRel("Primes using default approach"),
+                linkTo(methodOn(PrimesController.class).getPrimesUsingFirstApproach(10))
+                        .withRel("Primes using first approach"),
+                linkTo(methodOn(PrimesController.class).getPrimesUsingTrialDivision(10))
+                        .withRel("Primes using Trial Division"),
+                linkTo(methodOn(PrimesController.class).getPrimesUsingSieveOfEratosthenes(10))
+                        .withRel("Primes using Sieve Of Eratosthenes"));
+
+    }
+
+    @GetMapping("/primes/{max}")
+    public PrimeNumbers getPrimes(@PathVariable("max") final int maximumPrimeNumber)
+    {
+        return primesService.getPrimes(maximumPrimeNumber);
+    }
+
+    @GetMapping("/primesUsingFirstApproach/{max}")
+    public EntityModel<PrimeNumbers> getPrimesUsingFirstApproach(@PathVariable("max") final int maximumPrimeNumber)
+    {
+        final PrimeNumbers primes = primesService.getPrimes(maximumPrimeNumber);
 
         return EntityModel.of(
                 primes,
-                linkTo(methodOn(PrimesController.class).getPrimesUpTo(maximumPrimeNumber)).withSelfRel(),
-                linkTo(methodOn(PrimesController.class).getPrimesUsingTrialDivision(maximumPrimeNumber)).withSelfRel());
+                linkTo(methodOn(PrimesController.class).getPrimes(maximumPrimeNumber))
+                        .withSelfRel(),
+                linkTo(methodOn(PrimesController.class).getPrimesUsingTrialDivision(maximumPrimeNumber))
+                        .withRel("Primes using Trial Division"),
+                linkTo(methodOn(PrimesController.class).getPrimesUsingSieveOfEratosthenes(maximumPrimeNumber))
+                        .withRel("Primes using Sieve Of Eratosthenes"));
     }
 
-    @GetMapping("/primes/byTrialDivision/{max}")
+    @GetMapping("/primesUsingTrialDivision/{max}")
     public EntityModel<PrimeNumbers> getPrimesUsingTrialDivision(@PathVariable("max") final int maximumPrimeNumber)
     {
         final PrimeNumbers primes = primesService.getPrimesUsingTrialDivision(maximumPrimeNumber);
 
-        return EntityModel.of(primes);
+        return EntityModel.of(
+                primes,
+                linkTo(methodOn(PrimesController.class).getPrimes(maximumPrimeNumber))
+                        .withRel("Primes using first approach"),
+                linkTo(methodOn(PrimesController.class).getPrimesUsingTrialDivision(maximumPrimeNumber))
+                        .withSelfRel(),
+                linkTo(methodOn(PrimesController.class).getPrimesUsingSieveOfEratosthenes(maximumPrimeNumber))
+                        .withRel("Primes using Sieve Of Eratosthenes"));
+    }
+
+    @GetMapping("/primesUsingSieveOfEratosthenes/{max}")
+    public EntityModel<PrimeNumbers> getPrimesUsingSieveOfEratosthenes(@PathVariable("max") final int maximumPrimeNumber)
+    {
+        final PrimeNumbers primes = primesService.getPrimesUsingSieveOfEratosthenes(maximumPrimeNumber);
+
+        return EntityModel.of(
+                primes,
+                linkTo(methodOn(PrimesController.class).getPrimes(maximumPrimeNumber))
+                        .withRel("Primes using first approach"),
+                linkTo(methodOn(PrimesController.class).getPrimesUsingTrialDivision(maximumPrimeNumber))
+                        .withRel("Primes using Trial Division"),
+                linkTo(methodOn(PrimesController.class).getPrimesUsingSieveOfEratosthenes(maximumPrimeNumber))
+                        .withSelfRel());
     }
 }
