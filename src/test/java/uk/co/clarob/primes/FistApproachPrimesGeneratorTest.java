@@ -1,11 +1,11 @@
 package uk.co.clarob.primes;
 
-class FirstPrimesGeneratorTest extends PrimesGeneratorTestBase
+class FistApproachPrimesGeneratorTest extends PrimesGeneratorTestBase
 {
     @Override
     PrimesGenerator createPrimesGenerator()
     {
-        return new FistPrimesGenerator();
+        return new FistApproachPrimesGenerator();
     }
 
     @Override

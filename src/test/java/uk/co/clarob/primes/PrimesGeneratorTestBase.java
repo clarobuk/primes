@@ -23,6 +23,7 @@ import static org.hamcrest.Matchers.is;
 abstract class PrimesGeneratorTestBase
 {
     private static final Logger log = LoggerFactory.getLogger(PrimesGeneratorTestBase.class);
+
     private static final NumberFormat numberFormat = new DecimalFormat("#,###");
 
     private PrimesGenerator primesGenerator;

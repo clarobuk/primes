@@ -1,5 +1,7 @@
 package uk.co.clarob.primes;
 
+import org.springframework.stereotype.Component;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +13,7 @@ import static java.lang.Math.sqrt;
  * have got to the square root of the number being test there is  no need to test any further as we would have
  * already found the other factor in the pair. Turns out this is called Trial Division and is surprisingly fast.
  */
+@Component
 public class TrialDivisionPrimesGenerator implements PrimesGenerator
 {
     @Override

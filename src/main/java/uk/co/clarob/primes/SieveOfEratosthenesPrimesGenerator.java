@@ -1,5 +1,7 @@
 package uk.co.clarob.primes;
 
+import org.springframework.stereotype.Component;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -8,6 +10,7 @@ import java.util.List;
  * An attempt to make the Sieve of Eratosthenes faster by using an array as working storage rather than a list. This
  * proved to be much faster and faster than SimplestPrimesGenerator.
  */
+@Component
 public class SieveOfEratosthenesPrimesGenerator implements PrimesGenerator
 {
     @Override

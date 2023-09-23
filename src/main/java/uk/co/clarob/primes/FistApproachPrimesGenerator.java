@@ -1,5 +1,8 @@
 package uk.co.clarob.primes;
 
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.stereotype.Component;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,10 +11,12 @@ import java.util.List;
  * removing those that are multiples of already established primes. Turns out this is a form of the Sieve of
  * Eratosthenes and is considerably slower than trial division using my code (SimplestPrimesGenerator).
  */
-public class FistPrimesGenerator implements PrimesGenerator
+@Component()
+public class FistApproachPrimesGenerator implements PrimesGenerator
 {
     @SuppressWarnings("java:s127")
     @Override
+    @Cacheable("FistApproachPrimesGenerator")
     public List<Integer> generate(final int maximumPossiblePrimeNumber)
     {
         final List<Integer> possibles = new ArrayList<>(maximumPossiblePrimeNumber);

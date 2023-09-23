@@ -56,7 +56,7 @@ public class FindPracticalMaximum
         final int elapsedTimeLimitInMilliseconds = 10000;
         final int maximumPrimeNumberToAttempt = Integer.MAX_VALUE;
         final int firstImplementationMaximum = findPracticalMaximum.find(
-                new FistPrimesGenerator(),
+                new FistApproachPrimesGenerator(),
                 elapsedTimeLimitInMilliseconds,
                 maximumPrimeNumberToAttempt);
         final int trialDivisionMaximum = findPracticalMaximum.find(
