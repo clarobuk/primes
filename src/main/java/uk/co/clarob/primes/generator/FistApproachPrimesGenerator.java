@@ -1,4 +1,4 @@
-package uk.co.clarob.primes;
+package uk.co.clarob.primes.generator;
 
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
@@ -19,6 +19,7 @@ public class FistApproachPrimesGenerator implements PrimesGenerator
     @Cacheable("FistApproachPrimesGenerator")
     public List<Integer> generate(final int maximumPossiblePrimeNumber)
     {
+        checkOutOfBounds(maximumPossiblePrimeNumber);
         final List<Integer> possibles = new ArrayList<>(maximumPossiblePrimeNumber);
         for (int number = 2; number <= maximumPossiblePrimeNumber; number++)
         {

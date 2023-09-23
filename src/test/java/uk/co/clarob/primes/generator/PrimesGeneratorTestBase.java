@@ -1,4 +1,4 @@
-package uk.co.clarob.primes;
+package uk.co.clarob.primes.generator;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.StopWatch;
+import uk.co.clarob.primes.controller.OutOfRangeException;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -15,6 +16,7 @@ import static java.util.Arrays.asList;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Abstract class with all the unit tests for prime number generators, so that all the implementations can be checked
@@ -131,6 +133,20 @@ abstract class PrimesGeneratorTestBase
         assertThat(actualValue.get(99999), is(equalTo(1299709))); // 100,000th
         assertThat(actualValue.get(999999), is(equalTo(15485863))); // 1,000,000th
     }
+
+    @Test
+    void shouldRaiseExceptionWhenMaximumIsTooSmall()
+    {
+        // arrange
+        final String expectedValue = "Maximum possible prime number: 1 provided is less than 2 which is not valid for generating prime numbers.";
+        // act
+        // assert
+        final OutOfRangeException outOfRangeException = assertThrows(
+                OutOfRangeException.class,
+                () -> primesGenerator.generate(1));
+        assertThat(outOfRangeException.getMessage(), is(equalTo(expectedValue)));
+    }
+
 
     private List<Integer> generateAndLogTimings(final int maximumPossibleNumber, final int expectedNumberOfPrimes)
     {

@@ -1,4 +1,4 @@
-package uk.co.clarob.primes;
+package uk.co.clarob.primes.controller;
 
 /**
  * Used when the maximumPossiblePrimeNumber is too small i.e. less than 2 or too large for the generator to handle

@@ -1,4 +1,6 @@
-package uk.co.clarob.primes;
+package uk.co.clarob.primes.generator;
+
+import uk.co.clarob.primes.controller.OutOfRangeException;
 
 import java.util.List;
 
@@ -7,7 +9,7 @@ import java.util.List;
  * maximum it will generate all the prime numbers up to that maximum. It also has support ti indicate what is the
  * practical maximum this implementation can support.
  */
-interface PrimesGenerator
+public interface PrimesGenerator
 {
     /**
      * Generate the list of prime numbers up to and possibly including the maximum specified.
@@ -26,4 +28,21 @@ interface PrimesGenerator
      * @return The practical limit to the size of the maximumPossiblePrimeNumber.
      */
     int practicalMaximum();
+
+    default void checkOutOfBounds(final int maximumPossiblePrimeNumber)
+    {
+        if (maximumPossiblePrimeNumber < 2)
+        {
+            throw new OutOfRangeException(
+                    "Maximum possible prime number: " + maximumPossiblePrimeNumber + " provided is less than 2 which" +
+                            " is not valid for generating prime numbers.");
+        }
+        if (maximumPossiblePrimeNumber > this.practicalMaximum())
+        {
+            throw new OutOfRangeException(
+                    "Maximum possible prime number (" + maximumPossiblePrimeNumber + ") provided is bigger than the" +
+                            " practical maximum for the algorithm used by this prime number generator, there may be" +
+                            " another algorithm on the API that will support this request.");
+        }
+    }
 }

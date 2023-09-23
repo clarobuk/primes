@@ -1,11 +1,11 @@
-package uk.co.clarob.primes;
+package uk.co.clarob.primes.generator;
 
-class SieveOfEratosthenesPrimesGeneratorTest extends PrimesGeneratorTestBase
+class TrialDivisionPrimesGeneratorTest extends PrimesGeneratorTestBase
 {
     @Override
     PrimesGenerator createPrimesGenerator()
     {
-        return new SieveOfEratosthenesPrimesGenerator();
+        return new TrialDivisionPrimesGenerator();
     }
 
     @Override
@@ -13,4 +13,5 @@ class SieveOfEratosthenesPrimesGeneratorTest extends PrimesGeneratorTestBase
     {
         return this.getClass().getSimpleName();
     }
+
 }

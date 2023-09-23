@@ -1,4 +1,4 @@
-package uk.co.clarob.primes;
+package uk.co.clarob.primes.generator;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,4 +1,4 @@
-package uk.co.clarob.primes;
+package uk.co.clarob.primes.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StopWatch;
+import uk.co.clarob.primes.controller.OutOfRangeException;
+import uk.co.clarob.primes.entity.PrimeNumbers;
+import uk.co.clarob.primes.generator.PrimesGenerator;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -20,9 +23,9 @@ public class PrimesService
 
     private static final NumberFormat numberFormat = new DecimalFormat("#,###");
 
-    final PrimesGenerator firstApproachPrimesGenerator;
-    final PrimesGenerator trialDivisionPrimesGenerator;
-    final PrimesGenerator sieveOfEratosthenesPrimesGenerator;
+    private final PrimesGenerator firstApproachPrimesGenerator;
+    private final PrimesGenerator trialDivisionPrimesGenerator;
+    private final PrimesGenerator sieveOfEratosthenesPrimesGenerator;
 
     @Autowired
     public PrimesService(

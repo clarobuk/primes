@@ -1,12 +1,16 @@
-package uk.co.clarob.primes;
+package uk.co.clarob.primes.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
+import uk.co.clarob.primes.entity.PrimeNumbers;
+import uk.co.clarob.primes.entity.Usage;
+import uk.co.clarob.primes.service.PrimesService;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
@@ -35,8 +39,8 @@ public class PrimesController
         log.info("information()");
         return EntityModel.of(
                 new Usage("Service to generate and return prime numbers up to the specified maximum value"),
-                linkTo(methodOn(PrimesController.class).getPrimes(10))
-                        .withRel("Primes using default approach"),
+                WebMvcLinkBuilder.linkTo(methodOn(PrimesController.class).getPrimes(10))
+                                 .withRel("Primes using default approach"),
                 linkTo(methodOn(PrimesController.class).getPrimesUsingFirstApproach(10))
                         .withRel(FIRST_APPROACH_LABEL),
                 linkTo(methodOn(PrimesController.class).getPrimesUsingTrialDivision(10))

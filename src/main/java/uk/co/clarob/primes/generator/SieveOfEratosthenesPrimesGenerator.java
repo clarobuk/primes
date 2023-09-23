@@ -1,4 +1,4 @@
-package uk.co.clarob.primes;
+package uk.co.clarob.primes.generator;
 
 import org.springframework.stereotype.Component;
 
