@@ -14,3 +14,8 @@ Azure: https://primes-primes.azuremicroservices.io
 * I did the first implementation without any research just to get something working but it turned out it would have been a fast algorithm if I had not used a list.
 * I only added caching to the first implementation that I created to show its usage as the others were quite fast by themselves.
 * Creating sub-packages for the different components of the API wasn't really necessary for such a small application
+
+
+### Azure Integration
+* mvn com.microsoft.azure:azure-spring-apps-maven-plugin:1.19.0:config -DadvancedOptions 
+* mvn azure-spring-apps:deploy
