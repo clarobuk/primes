@@ -9,6 +9,9 @@ import static org.apache.commons.lang3.builder.ToStringStyle.JSON_STYLE;
 /**
  * Used to return information about the API from default end-point.
  */
+// java:S1700 - field with the same name as a class OK, just to support end-point needing a "usage" element
+// ClassCanBeRecord - cosmetic preference for seeing code in full
+@SuppressWarnings({"java:S1700", "ClassCanBeRecord"})
 public class Usage
 {
     private final String usage;

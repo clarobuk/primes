@@ -27,7 +27,7 @@ public interface PrimesGenerator
      *
      * @return The practical limit to the size of the maximumPossiblePrimeNumber.
      */
-    int practicalMaximum();
+    int getPracticalMaximum();
 
     /**
      * A method that can be used in each implementation to handle invalid inputs in a consistent way.
@@ -41,7 +41,7 @@ public interface PrimesGenerator
                     "Maximum possible prime number (" + maximumPossiblePrimeNumber + ") provided is less than 2 which" +
                             " is not valid for generating prime numbers.");
         }
-        if (maximumPossiblePrimeNumber > this.practicalMaximum())
+        if (maximumPossiblePrimeNumber > this.getPracticalMaximum())
         {
             throw new OutOfRangeException(
                     "Maximum possible prime number (" + maximumPossiblePrimeNumber + ") provided is bigger than the" +

@@ -44,10 +44,10 @@ class PrimesServiceTest
     {
         // arrange
         final PrimeNumbers expectedValue = new PrimeNumbers(10, asList(2, 3, 5, 7));
-        when(mockFirstApproachPrimesGenerator.practicalMaximum()).thenReturn(1000);
+        when(mockFirstApproachPrimesGenerator.getPracticalMaximum()).thenReturn(1000);
         when(mockFirstApproachPrimesGenerator.generate(10)).thenReturn(asList(2, 3, 5, 7));
         // act
-        final PrimeNumbers actualValue = primesService.getPrimes(10);
+        final PrimeNumbers actualValue = primesService.getPrimesUsingFirstApproach(10);
         // assert
         assertThat(actualValue, is(equalTo(expectedValue)));
     }
@@ -58,7 +58,7 @@ class PrimesServiceTest
     {
         // arrange
         final PrimeNumbers expectedValue = new PrimeNumbers(10, asList(2, 3, 5, 7));
-        when(mockTrialDivisionPrimesGenerator.practicalMaximum()).thenReturn(1000);
+        when(mockTrialDivisionPrimesGenerator.getPracticalMaximum()).thenReturn(1000);
         when(mockTrialDivisionPrimesGenerator.generate(10)).thenReturn(asList(2, 3, 5, 7));
         // act
         final PrimeNumbers actualValue = primesService.getPrimesUsingTrialDivision(10);
@@ -72,7 +72,7 @@ class PrimesServiceTest
     {
         // arrange
         final PrimeNumbers expectedValue = new PrimeNumbers(10, asList(2, 3, 5, 7));
-        when(mockSieveOfEratosthenesPrimesGenerator.practicalMaximum()).thenReturn(1000);
+        when(mockSieveOfEratosthenesPrimesGenerator.getPracticalMaximum()).thenReturn(1000);
         when(mockSieveOfEratosthenesPrimesGenerator.generate(10)).thenReturn(asList(2, 3, 5, 7));
         // act
         final PrimeNumbers actualValue = primesService.getPrimesUsingSieveOfEratosthenes(10);
@@ -90,7 +90,7 @@ class PrimesServiceTest
         // assert
         final OutOfRangeException outOfRangeException = assertThrows(
                 OutOfRangeException.class,
-                () -> primesService.getPrimes(1));
+                () -> primesService.getPrimesUsingFirstApproach(1));
         assertThat(outOfRangeException.getMessage(), is(equalTo(expectedValue)));
     }
 
@@ -104,7 +104,7 @@ class PrimesServiceTest
         // assert
         final OutOfRangeException outOfRangeException = assertThrows(
                 OutOfRangeException.class,
-                () -> primesService.getPrimes(-10));
+                () -> primesService.getPrimesUsingFirstApproach(-10));
         assertThat(outOfRangeException.getMessage(), is(equalTo(expectedValue)));
     }
 
@@ -114,12 +114,12 @@ class PrimesServiceTest
     {
         // arrange
         final String expectedValue = "Maximum possible prime number (1001) provided is bigger than the practical maximum for the algorithm used by this prime number generator, there may be another algorithm on the API that will support this request.";
-        when(mockFirstApproachPrimesGenerator.practicalMaximum()).thenReturn(1000);
+        when(mockFirstApproachPrimesGenerator.getPracticalMaximum()).thenReturn(1000);
         // act
         // assert
         final OutOfRangeException outOfRangeException = assertThrows(
                 OutOfRangeException.class,
-                () -> primesService.getPrimes(1001));
+                () -> primesService.getPrimesUsingFirstApproach(1001));
         assertThat(outOfRangeException.getMessage(), is(equalTo(expectedValue)));
     }
 }

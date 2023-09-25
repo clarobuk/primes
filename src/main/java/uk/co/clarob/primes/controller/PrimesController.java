@@ -16,6 +16,10 @@ import uk.co.clarob.primes.service.PrimesService;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
+/**
+ * Controller offering several end-points to calculate and return all the prime numbers up to a maximum. There is also
+ * an information end-point returning links to all the others.
+ */
 @RestController
 public class PrimesController
 {
@@ -34,7 +38,12 @@ public class PrimesController
         log.info("{} created", PrimesController.class.getSimpleName());
     }
 
-    @GetMapping(path="/", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    /**
+     * Return some information about what's available on the API.
+     *
+     * @return Some text and links to the available end-points.
+     */
+    @GetMapping(path="/", produces = MediaType.APPLICATION_JSON_VALUE)
     public EntityModel<Usage> information()
     {
         log.info("information()");
@@ -51,19 +60,33 @@ public class PrimesController
 
     }
 
-    @GetMapping(path="/primes/{max}", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    /**
+     * The required end-point to return all the prime numbers up to and possibly including the maximum specified.
+     *
+     * @param maximumPossiblePrimeNumber The limit to go up to when generating prime numbers.
+     * @return An object containing the limit and the list of prime numbers found up to that limit.
+     */
+    @GetMapping(path="/primes/{max}", produces = MediaType.APPLICATION_JSON_VALUE)
     public PrimeNumbers getPrimes(@PathVariable("max") final int maximumPossiblePrimeNumber)
     {
         log.info("getPrimes({})", maximumPossiblePrimeNumber);
-        return primesService.getPrimes(maximumPossiblePrimeNumber);
+        return primesService.getPrimesUsingFirstApproach(maximumPossiblePrimeNumber);
     }
 
+    /**
+     * Get all the prime numbers up to the maximum using the first approach specifically. This uses a HATEOAS approach
+     * and returns details of this end-point and the other ones for the specific implementations.
+     *
+     * @param maximumPossiblePrimeNumber The limit to go up to when generating prime numbers.
+     * @return An object containing the limit and the list of prime numbers found up to that limit, wrapped with links
+     * to all the end-points offering specific prime number generators.
+     */
     @GetMapping(path="/primesUsingFirstApproach/{max}", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public EntityModel<PrimeNumbers> getPrimesUsingFirstApproach(
             @PathVariable("max") final int maximumPossiblePrimeNumber)
     {
         log.info("getPrimesUsingFirstApproach({})", maximumPossiblePrimeNumber);
-        final PrimeNumbers primes = primesService.getPrimes(maximumPossiblePrimeNumber);
+        final PrimeNumbers primes = primesService.getPrimesUsingFirstApproach(maximumPossiblePrimeNumber);
         return EntityModel.of(
                 primes,
                 linkTo(methodOn(PrimesController.class).getPrimesUsingFirstApproach(maximumPossiblePrimeNumber))
@@ -74,6 +97,15 @@ public class PrimesController
                         .withRel(SIEVE_OF_ERATOSTHENES_LABEL));
     }
 
+    /**
+     * Get all the prime numbers up to the maximum using the Trial Division algorithm specifically. This uses a HATEOAS
+     * approach
+     * and returns details of this end-point and the other ones for the specific implementations.
+     *
+     * @param maximumPossiblePrimeNumber The limit to go up to when generating prime numbers.
+     * @return An object containing the limit and the list of prime numbers found up to that limit, wrapped with links
+     * to all the end-points offering specific prime number generators.
+     */
     @GetMapping(path="/primesUsingTrialDivision/{max}", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public EntityModel<PrimeNumbers> getPrimesUsingTrialDivision(
             @PathVariable("max") final int maximumPossiblePrimeNumber)
@@ -90,6 +122,14 @@ public class PrimesController
                         .withRel(SIEVE_OF_ERATOSTHENES_LABEL));
     }
 
+    /**
+     * Get all the prime numbers up to the maximum using the Sieve Of Eratosthenes algorithm specifically. This uses a
+     * HATEOAS approach and returns details of this end-point and the other ones for the specific implementations.
+     *
+     * @param maximumPossiblePrimeNumber The limit to go up to when generating prime numbers.
+     * @return An object containing the limit and the list of prime numbers found up to that limit, wrapped with links
+     * to all the end-points offering specific prime number generators.
+     */
     @GetMapping(path="/primesUsingSieveOfEratosthenes/{max}", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public EntityModel<PrimeNumbers> getPrimesUsingSieveOfEratosthenes(
             @PathVariable("max") final int maximumPossiblePrimeNumber)

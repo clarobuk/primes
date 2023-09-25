@@ -20,8 +20,8 @@ public class FindPracticalMaximum
 
     /**
      * Find the practical maximum for the given inputs. This will be an approximation as the algorithm here just keeps
-     * doubling the maximum until the elapsed time exceeds elapsedTimeLimitInMilliseconds and then takes the previous
-     * value, which will be below the limit. In practice rounding up the value returned will be fine.
+     * doubling the maximum until the elapsed time exceeds elapsedTimeLimitInMilliseconds, which will be returned as
+     * the limit. In practice rounding up the value returned will be fine.
      *
      * @param primesGenerator The generator to use for the tests.
      * @param elapsedTimeLimitInMilliseconds The time in milliseconds to act as the limit above which no further
@@ -34,6 +34,7 @@ public class FindPracticalMaximum
                     final int elapsedTimeLimitInMilliseconds,
                     final int maximumToAttempt)
     {
+        final String generatorClassName = primesGenerator.getClass().getSimpleName();
         final StopWatch stopWatch = new StopWatch();
         for (int maximumPrimeNumber = 10000; maximumPrimeNumber <= maximumToAttempt; maximumPrimeNumber = maximumPrimeNumber * 2)
         {
@@ -41,10 +42,10 @@ public class FindPracticalMaximum
             primesGenerator.generate(maximumPrimeNumber);
             stopWatch.stop();
             final float elapsedTime = (float) stopWatch.getLastTaskTimeNanos() / 1000000;
-            log.info("Finding prime numbers up to {} primes took {} millis", numberFormat.format(maximumPrimeNumber), elapsedTime);
+            log.info("Finding prime numbers up to {} primes with {} took {} millis", numberFormat.format(maximumPrimeNumber), generatorClassName, elapsedTime);
             if (elapsedTime > elapsedTimeLimitInMilliseconds)
             {
-                return maximumPrimeNumber / 2;
+                return maximumPrimeNumber;
             }
         }
         return maximumToAttempt;

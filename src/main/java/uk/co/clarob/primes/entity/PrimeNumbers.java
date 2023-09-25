@@ -8,6 +8,10 @@ import java.util.List;
 
 import static org.apache.commons.lang3.builder.ToStringStyle.JSON_STYLE;
 
+/**
+ * An entity used to hold the results of the calculations formatted according to the test specification. Standard
+ * equals(), hashCode() and toString() methods added principally to support testing.
+ */
 // ClassCanBeRecord - cosmetic preference for seeing code in full
 @SuppressWarnings("ClassCanBeRecord")
 public class PrimeNumbers

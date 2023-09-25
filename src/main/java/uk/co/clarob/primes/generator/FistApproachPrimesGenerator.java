@@ -53,8 +53,8 @@ public class FistApproachPrimesGenerator implements PrimesGenerator
     }
 
     @Override
-    public int practicalMaximum()
+    public int getPracticalMaximum()
     {
-        return 400000;
+        return 650000;
     }
 }

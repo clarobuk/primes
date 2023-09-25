@@ -83,8 +83,8 @@ public class SieveOfEratosthenesPrimesGenerator implements PrimesGenerator
     }
 
     @Override
-    public int practicalMaximum()
+    public int getPracticalMaximum()
     {
-        return 1000000000;
+        return 1400000000;
     }
 }

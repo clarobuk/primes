@@ -38,7 +38,7 @@ public class PrimesService
         this.sieveOfEratosthenesPrimesGenerator = sieveOfEratosthenesPrimesGenerator;
     }
 
-    public PrimeNumbers getPrimes(final int maximumPossiblePrimeNumber)
+    public PrimeNumbers getPrimesUsingFirstApproach(final int maximumPossiblePrimeNumber)
     {
         return validateAndCallGenerator(firstApproachPrimesGenerator, maximumPossiblePrimeNumber);
     }
@@ -53,6 +53,14 @@ public class PrimesService
         return validateAndCallGenerator(sieveOfEratosthenesPrimesGenerator, maximumPossiblePrimeNumber);
     }
 
+    /**
+     * Carry out validation and then run the calculations with a timer. There is also validation on the individual
+     * generators, but just showing one technique here.
+     *
+     * @param primesGenerator The generator to use.
+     * @param maximumPossiblePrimeNumber The maximum possible prime number.
+     * @return PrimeNumbers entity with the maximum and a list of prime numbers calculated up to the maximum.
+     */
     // java:S2629 - shouldn't evaluate parameters to logger in general as if logging at that level is switched off
     // then it is a waste of time, but we always want this logging so OK here
     @SuppressWarnings("java:S2629")
@@ -66,7 +74,7 @@ public class PrimesService
                     "Maximum possible prime number (" + maximumPossiblePrimeNumber + ") provided is less than 2 which" +
                             " is not valid for generating prime numbers.");
         }
-        if (maximumPossiblePrimeNumber > primesGenerator.practicalMaximum())
+        if (maximumPossiblePrimeNumber > primesGenerator.getPracticalMaximum())
         {
             throw new OutOfRangeException(
                     "Maximum possible prime number (" + maximumPossiblePrimeNumber + ") provided is bigger than the" +

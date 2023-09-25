@@ -41,8 +41,8 @@ public class TrialDivisionPrimesGenerator implements PrimesGenerator
     }
 
     @Override
-    public int practicalMaximum()
+    public int getPracticalMaximum()
     {
-        return 20000000;
+        return 21000000;
     }
 }

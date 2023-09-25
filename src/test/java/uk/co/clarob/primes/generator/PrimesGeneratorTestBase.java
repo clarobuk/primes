@@ -101,7 +101,7 @@ abstract class PrimesGeneratorTestBase
     {
         // arrange
         // act
-        if (primesGenerator.practicalMaximum() < 1000000)
+        if (primesGenerator.getPracticalMaximum() < 1000000)
         {
             return;
         }
@@ -120,7 +120,7 @@ abstract class PrimesGeneratorTestBase
     {
         // arrange
         // act
-        if (primesGenerator.practicalMaximum() < 16000000)
+        if (primesGenerator.getPracticalMaximum() < 16000000)
         {
             return;
         }
@@ -167,11 +167,12 @@ abstract class PrimesGeneratorTestBase
     void shouldRaiseExceptionWhenMaximumIsGreaterThanPracticalMaximum()
     {
         // arrange
+        final int maximumThatIsTooLarge = primesGenerator.getPracticalMaximum() + 1;
         // act
         // assert
         assertThrows(
                 OutOfRangeException.class,
-                () -> primesGenerator.generate(primesGenerator.practicalMaximum() + 1));
+                () -> primesGenerator.generate(maximumThatIsTooLarge));
     }
 
 

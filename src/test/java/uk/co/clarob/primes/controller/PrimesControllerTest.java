@@ -42,7 +42,7 @@ class PrimesControllerTest
     {
         // arrange
         final PrimeNumbers expectedValue = new PrimeNumbers(10, asList(2, 3, 5, 7));
-        when(mockPrimesService.getPrimes(10)).thenReturn(new PrimeNumbers(10, asList(2, 3, 5, 7)));
+        when(mockPrimesService.getPrimesUsingFirstApproach(10)).thenReturn(new PrimeNumbers(10, asList(2, 3, 5, 7)));
         // act
         final PrimeNumbers actualValue = primesController.getPrimes(10);
         // assert
@@ -54,7 +54,7 @@ class PrimesControllerTest
     {
         // arrange
         final PrimeNumbers expectedValue = new PrimeNumbers(10, asList(2, 3, 5, 7));
-        when(mockPrimesService.getPrimes(10)).thenReturn(new PrimeNumbers(10, asList(2, 3, 5, 7)));
+        when(mockPrimesService.getPrimesUsingFirstApproach(10)).thenReturn(new PrimeNumbers(10, asList(2, 3, 5, 7)));
         // act
         final EntityModel<PrimeNumbers> actualValue = primesController.getPrimesUsingFirstApproach(10);
         // assert
